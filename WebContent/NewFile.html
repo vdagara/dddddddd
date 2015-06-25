@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html><head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <title>Table example</title>
+
+    <!-- Load UI5, select gold reflection theme and the "commons" and "table" control libraries -->
+    <script id='sap-ui-bootstrap' type='text/javascript'
+       src='sap-ui-core.js'
+       data-sap-ui-theme='sap_goldreflection'
+       data-sap-ui-libs='sap.ui.commons,sap.ui.table'></script>
+
+    <script>
+
+        // create the DataTable control
+        var oTable = new sap.ui.table.Table({editable:true});
+
+        // define the Table columns
+        var oControl = new sap.ui.commons.TextView({text:"{comments/data/from/username}"});     // short binding notation
+        oTable.addColumn(new sap.ui.table.Column({label: new sap.ui.commons.Label({text: "Group"}), template: oControl }));
+
+        var oControl = new sap.ui.commons.TextView({text:"{comments/data/from/id}"}); // short binding notation
+        oTable.addColumn(new sap.ui.table.Column({label: new sap.ui.commons.Label({text: "Group Text"}), template: oControl }));
+
+        var oModel = new sap.ui.model.json.JSONModel();
+
+        var aData = 
+       jQuery.ajax({
+
+                url: "https://api.instagram.com/v1/media/popular?client_id=d6ff37e000de4fc7882e4e5fccfff236",  // for different servers cross-domain restrictions need to be handled
+
+                dataType: "json",
+
+                success: function(data, textStatus, jqXHR) { // callback called when data is received
+                    var JsonData = data;
+                   oModel.setData(JsonData);  // fill the received data into the JSONModel
+                    alert("sparta");
+
+                },
+
+                error: function(jqXHR, textStatus, errorThrown) {
+                      alert("error");
+                }
+
+            });
+        // create a JSONModel, fill in the data and bind the Table to this model
+
+
+      // oModel.setData(aData);
+        oTable.setModel(oModel);
+        oTable.bindRows("/data");
+
+        // finally place the Table into the UI
+        oTable.placeAt("content");
+
+    </script>

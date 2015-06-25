@@ -1,0 +1,24 @@
+#routeMap{
+	border-style: groove;
+}
+#idrouteFilterLabel{
+	font-size: 14px;
+}
+#idcbRouteType{
+	margin-bottom: 10px;
+	
+}
+#idtravelDateLabel{
+	font-size: 14px;
+}
+#idTravelDatePicker{
+}
+#idoRouteTable{
+	
+}
+.sapUiUx3ShellHeader>img {
+	max-height: 40px;
+}
+#idoSecCell2{
+vertical-align: top;
+}
